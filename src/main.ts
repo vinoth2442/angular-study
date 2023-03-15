@@ -2,6 +2,7 @@ import 'zone.js/dist/zone';
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { bootstrapApplication } from '@angular/platform-browser';
+import { CountService } from './count.service';
 
 @Component({
   selector: 'my-app',
@@ -18,12 +19,20 @@ import { bootstrapApplication } from '@angular/platform-browser';
       <p> Read Only </p>
       </ng-template>
     <p [contentEditable]="editMessage">{{message}}</p>
+
+
+    /* Service Test */
+<br>
+    <button (click)="printCount()">Print Count</button>
+    <p> Count printed in console</p>
   `,
 })
 export class App {
   name = 'Angular';
   message = 'This is message';
   editMessage = false;
+  count = 0;
+  constructor(private countserv: CountService) {}
   editText() {
     this.editMessage = !this.editMessage;
     if (this.editMessage) {
@@ -31,6 +40,10 @@ export class App {
     } else {
       this.message = 'This is read only message!';
     }
+  }
+  printCount() {
+    this.countserv.writeCount(this.count);
+    this.count++;
   }
 }
 
