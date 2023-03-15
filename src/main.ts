@@ -9,7 +9,14 @@ import { bootstrapApplication } from '@angular/platform-browser';
   imports: [CommonModule],
   template: `
     <h1>Hello from {{name}}!</h1>
+
     <button (click)="editText()">Edit Message</button>
+    <div *ngIf="editMessage; else noEdit">
+      <p> This is now editable </p>
+      </div>
+      <ng-template #noEdit>
+      <p> Read Only </p>
+      </ng-template>
     <p [contentEditable]="editMessage">{{message}}</p>
   `,
 })
